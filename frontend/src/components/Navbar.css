@@ -1,0 +1,78 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 28px;
+  background: #1e293b;
+  border-bottom: 1px solid #334155;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-brand {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+}
+
+.nav-links a {
+  color: #94a3b8;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: #e2e8f0; }
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.user-name {
+  color: #e2e8f0;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.role-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.role-badge.admin {
+  background: #312e81;
+  color: #a5b4fc;
+}
+
+.role-badge.member {
+  background: #134e4a;
+  color: #5eead4;
+}
+
+.nav-user button {
+  padding: 7px 16px;
+  background: transparent;
+  border: 1px solid #475569;
+  border-radius: 6px;
+  color: #94a3b8;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.nav-user button:hover {
+  background: #334155;
+  color: #e2e8f0;
+}

@@ -1,0 +1,111 @@
+body { background: #0f172a; }
+
+.dashboard {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.dash-header h1 {
+  font-size: 26px;
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+.dash-header p {
+  color: #64748b;
+  margin-top: 6px;
+  font-size: 15px;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.stat-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.stat-card:hover { transform: translateY(-2px); }
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card.total { border-top: 3px solid #6366f1; }
+.stat-card.todo { border-top: 3px solid #64748b; }
+.stat-card.progress { border-top: 3px solid #f59e0b; }
+.stat-card.done { border-top: 3px solid #10b981; }
+.stat-card.overdue { border-top: 3px solid #ef4444; }
+
+.recent-tasks h2 {
+  font-size: 18px;
+  color: #e2e8f0;
+  margin-bottom: 16px;
+}
+
+.task-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #334155;
+}
+
+.task-table th {
+  background: #0f172a;
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #64748b;
+}
+
+.task-table td {
+  padding: 13px 16px;
+  color: #cbd5e1;
+  font-size: 14px;
+  border-top: 1px solid #334155;
+}
+
+.task-table tr:hover td { background: #263349; }
+.task-table tr.overdue-row td { color: #fca5a5; }
+
+.status-badge, .priority-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.todo { background: #1e3a5f; color: #93c5fd; }
+.status-badge.in-progress { background: #422006; color: #fcd34d; }
+.status-badge.done { background: #052e16; color: #86efac; }
+.priority-badge.low { background: #134e4a; color: #5eead4; }
+.priority-badge.medium { background: #422006; color: #fcd34d; }
+.priority-badge.high { background: #450a0a; color: #f87171; }
+.empty { color: #64748b; text-align: center; padding: 40px; }
+
+@media (max-width: 768px) {
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+}

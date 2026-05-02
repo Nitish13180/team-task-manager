@@ -1,0 +1,217 @@
+.page-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  font-size: 24px;
+  color: #e2e8f0;
+  font-weight: 700;
+}
+
+.btn-primary {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+
+.btn-primary:hover { background: #4f46e5; }
+.btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.btn-danger-sm {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.2s;
+}
+
+.btn-danger-sm:hover { background: #ef4444; color: white; }
+
+.create-form {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.create-form input,
+.create-form textarea,
+.create-form select {
+  padding: 10px 14px;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  color: #e2e8f0;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.create-form input:focus,
+.create-form textarea:focus,
+.create-form select:focus { border-color: #6366f1; }
+.create-form textarea { min-height: 80px; resize: vertical; }
+
+.filter-bar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.filter-btn {
+  padding: 7px 16px;
+  background: transparent;
+  border: 1px solid #334155;
+  border-radius: 20px;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s;
+}
+
+.filter-btn:hover { border-color: #6366f1; color: #e2e8f0; }
+.filter-btn.active { background: #6366f1; border-color: #6366f1; color: white; }
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.project-card, .task-card {
+  background: #1e293b;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.project-card:hover, .task-card:hover {
+  transform: translateY(-2px);
+  border-color: #4f46e5;
+}
+
+.task-card.overdue {
+  border-color: #ef4444;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+.card-header h3 {
+  font-size: 15px;
+  color: #e2e8f0;
+  font-weight: 600;
+}
+
+.card-desc {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.task-meta {
+  color: #64748b;
+  font-size: 12px;
+  margin-bottom: 6px;
+}
+
+.due-date {
+  font-size: 12px;
+  color: #94a3b8;
+  margin-bottom: 12px;
+}
+
+.overdue-text { color: #f87171; }
+
+.card-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.status-select {
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid #334155;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  outline: none;
+}
+
+.status-select.todo { background: #1e3a5f; color: #93c5fd; }
+.status-select.in-progress { background: #422006; color: #fcd34d; }
+.status-select.done { background: #052e16; color: #86efac; }
+
+.status-dot {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  text-transform: capitalize;
+}
+
+.status-dot.active { background: #052e16; color: #86efac; }
+.status-dot.completed { background: #312e81; color: #a5b4fc; }
+.status-dot.archived { background: #1c1917; color: #78716c; }
+
+.priority-badge {
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.priority-badge.low { background: #134e4a; color: #5eead4; }
+.priority-badge.medium { background: #422006; color: #fcd34d; }
+.priority-badge.high { background: #450a0a; color: #f87171; }
+
+.empty {
+  color: #64748b;
+  text-align: center;
+  padding: 60px;
+  grid-column: 1 / -1;
+  font-size: 15px;
+}
+
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .page-header { flex-direction: column; gap: 14px; align-items: flex-start; }
+}
