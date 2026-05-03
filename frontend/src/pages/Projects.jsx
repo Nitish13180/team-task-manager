@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react';
-import { get, post, del } from '../utils/api';
+import { get, post, put, del } from '../utils/api';
 import './Projects.css';
-
+ 
 export default function Projects() {
   const [projects, setProjects] = useState([]);
+  const [users, setUsers] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', description: '' });
   const [loading, setLoading] = useState(false);
+  const [managingProject, setManagingProject] = useState(null);
   const user = JSON.parse(localStorage.getItem('user') || '{}');
-
+ 
   const fetchProjects = () => get('/api/projects').then(setProjects).catch(console.error);
-
-  useEffect(() => { fetchProjects(); }, []);
-
+  const fetchUsers = () => get('/api/users').then(setUsers).catch(console.error);
+ 
+  useEffect(() => {
+    fetchProjects();
+    if (user.role === 'admin') fetchUsers();
+  }, []);
+ 
   const handleCreate = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -27,7 +33,7 @@ export default function Projects() {
       setLoading(false);
     }
   };
-
+ 
   const handleDelete = async (id) => {
     if (!confirm('Delete this project?')) return;
     try {
@@ -37,7 +43,32 @@ export default function Projects() {
       alert(err.message);
     }
   };
-
+ 
+  const handleAddMember = async (projectId, userId, currentMembers) => {
+    const memberIds = currentMembers.map(m => m._id || m);
+    if (memberIds.includes(userId)) {
+      alert('User already a member!');
+      return;
+    }
+    try {
+      await put(`/api/projects/${projectId}`, { members: [...memberIds, userId] });
+      fetchProjects();
+      setManagingProject(null);
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+ 
+  const handleRemoveMember = async (projectId, userId, currentMembers) => {
+    const memberIds = currentMembers.map(m => m._id || m).filter(id => id !== userId);
+    try {
+      await put(`/api/projects/${projectId}`, { members: memberIds });
+      fetchProjects();
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+ 
   return (
     <div className="page-container">
       <div className="page-header">
@@ -48,7 +79,7 @@ export default function Projects() {
           </button>
         )}
       </div>
-
+ 
       {showForm && (
         <form className="create-form" onSubmit={handleCreate}>
           <input placeholder="Project Name" value={form.name}
@@ -60,7 +91,7 @@ export default function Projects() {
           </button>
         </form>
       )}
-
+ 
       <div className="cards-grid">
         {projects.length === 0 ? (
           <p className="empty">No projects yet. {user.role === 'admin' ? 'Create one!' : 'Ask your admin.'}</p>
@@ -71,9 +102,43 @@ export default function Projects() {
               <span className={`status-dot ${project.status}`}>{project.status}</span>
             </div>
             <p className="card-desc">{project.description || 'No description'}</p>
+            
+            {/* Members Section */}
+            <div className="members-section">
+              <p className="members-title">👥 Members ({project.members?.length || 0})</p>
+              <div className="members-list">
+                {project.members?.map(member => (
+                  <div key={member._id} className="member-tag">
+                    {member.name}
+                    {user.role === 'admin' && (
+                      <button className="remove-member" onClick={() => handleRemoveMember(project._id, member._id, project.members)}>×</button>
+                    )}
+                  </div>
+                ))}
+              </div>
+              
+              {/* Add Member Dropdown (Admin only) */}
+              {user.role === 'admin' && (
+                <div className="add-member-section">
+                  {managingProject === project._id ? (
+                    <div className="member-select-box">
+                      <select onChange={e => e.target.value && handleAddMember(project._id, e.target.value, project.members)} defaultValue="">
+                        <option value="">+ Select member to add</option>
+                        {users.filter(u => u.role === 'member' && !project.members?.find(m => m._id === u._id)).map(u => (
+                          <option key={u._id} value={u._id}>{u.name} ({u.email})</option>
+                        ))}
+                      </select>
+                      <button className="btn-cancel-sm" onClick={() => setManagingProject(null)}>Cancel</button>
+                    </div>
+                  ) : (
+                    <button className="btn-add-member" onClick={() => setManagingProject(project._id)}>+ Add Member</button>
+                  )}
+                </div>
+              )}
+            </div>
+ 
             <div className="card-footer">
               <span>👤 {project.owner?.name}</span>
-              <span>👥 {project.members?.length || 0} members</span>
               {user.role === 'admin' && (
                 <button className="btn-danger-sm" onClick={() => handleDelete(project._id)}>Delete</button>
               )}

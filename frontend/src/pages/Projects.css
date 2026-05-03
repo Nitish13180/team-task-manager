@@ -215,3 +215,15 @@
   .cards-grid { grid-template-columns: 1fr; }
   .page-header { flex-direction: column; gap: 14px; align-items: flex-start; }
 }
+
+.members-section { margin: 12px 0; }
+.members-title { font-size: 12px; color: #64748b; margin-bottom: 8px; }
+.members-list { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+.member-tag { background: #1e3a5f; color: #93c5fd; padding: 3px 10px; border-radius: 20px; font-size: 12px; display: flex; align-items: center; gap: 6px; }
+.remove-member { background: none; border: none; color: #f87171; cursor: pointer; font-size: 14px; padding: 0; line-height: 1; }
+.add-member-section { margin-top: 8px; }
+.btn-add-member { background: transparent; border: 1px dashed #4f46e5; color: #6366f1; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 12px; }
+.btn-add-member:hover { background: #1e1b4b; }
+.member-select-box { display: flex; gap: 8px; align-items: center; }
+.member-select-box select { flex: 1; padding: 6px; background: #0f172a; border: 1px solid #4f46e5; border-radius: 6px; color: #e2e8f0; font-size: 13px; }
+.btn-cancel-sm { padding: 5px 10px; background: transparent; border: 1px solid #475569; border-radius: 6px; color: #94a3b8; cursor: pointer; font-size: 12px; }

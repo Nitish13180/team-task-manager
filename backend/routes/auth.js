@@ -43,4 +43,14 @@ router.get('/me', require('../middleware/auth').protect, (req, res) => {
   res.json(req.user);
 });
 
+// GET all users (admin only)
+router.get('/users', require('../middleware/auth').protect, require('../middleware/auth').adminOnly, async (req, res) => {
+  try {
+    const users = await User.find().select('-password');
+    res.json(users);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 module.exports = router;
